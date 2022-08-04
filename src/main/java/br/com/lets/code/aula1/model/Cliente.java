@@ -1,17 +1,22 @@
 package br.com.lets.code.aula1.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Cliente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String name;
     private int age;
     private String number;
     private String email;
 
-    public Cliente(String name, int age, String number, String email) {
-        this.name = name;
-        this.age = age;
-        this.number = number;
-        this.email = email;
-    }
+    public Cliente(){}
 
     public String getName() {
         return name;
