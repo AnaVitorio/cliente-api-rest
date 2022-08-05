@@ -20,7 +20,6 @@ public class Cliente {
 
     @Min(18)
     @NotNull(message = "Idade não pode ser nulo")
-    @NotEmpty(message = "Idade não pode estar vazio")
     private int age;
 
     @Pattern(regexp = "\\w\\w\\d{9}", message = "VAT Number inválido!")

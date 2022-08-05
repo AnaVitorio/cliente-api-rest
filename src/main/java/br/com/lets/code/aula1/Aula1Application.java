@@ -21,7 +21,7 @@ public class Aula1Application {
 			clientePadrao.setName("Ana Carol");
 			clientePadrao.setAge(22);
 			clientePadrao.setEmail("ana22@gmail.com");
-			clientePadrao.setVatNumber("619999999");
+			clientePadrao.setVatNumber("XX999999999");
 
 			clienteRepository.save(clientePadrao);
 
