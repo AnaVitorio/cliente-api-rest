@@ -4,9 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Entity
 public class Cliente {
@@ -16,15 +14,23 @@ public class Cliente {
     private long id;
 
     @Size(min = 5,max = 11, message = "Nome deve ter entre 5 e 11 caracteres")
+    @NotNull(message = "Name não pode ser nulo")
+    @NotEmpty(message = "Nome não pode estar vazio")
     private String name;
 
     @Min(18)
+    @NotNull(message = "Idade não pode ser nulo")
+    @NotEmpty(message = "Idade não pode estar vazio")
     private int age;
 
-    //2 letras seguidas de vários numeros
+    @Pattern(regexp = "\\w\\w\\d+", message = "VAT Number inválido!")
+    @NotNull(message = "VAT Number não pode ser nulo")
+    @NotEmpty(message = "VAT Number não pode estar vazio")
     private String vatNumber;
 
     @Email(message="Email inválido")
+    @NotNull(message = "Email não pode ser nulo")
+    @NotEmpty(message = "Email não pode estar vazio")
     private String email;
 
     public Cliente(){}
