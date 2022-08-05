@@ -23,7 +23,7 @@ public class Cliente {
     @NotEmpty(message = "Idade não pode estar vazio")
     private int age;
 
-    @Pattern(regexp = "\\w\\w\\d+", message = "VAT Number inválido!")
+    @Pattern(regexp = "\\w\\w\\d{9}", message = "VAT Number inválido!")
     @NotNull(message = "VAT Number não pode ser nulo")
     @NotEmpty(message = "VAT Number não pode estar vazio")
     private String vatNumber;
