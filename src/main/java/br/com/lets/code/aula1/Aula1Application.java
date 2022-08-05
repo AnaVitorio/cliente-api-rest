@@ -18,10 +18,10 @@ public class Aula1Application {
 	public CommandLineRunner carregandoBanco(ClienteRepository clienteRepository) throws Exception{
 		return (args) -> {
 			Cliente clientePadrao = new Cliente();
-			clientePadrao.setName("Ana");
+			clientePadrao.setName("Ana Carol");
 			clientePadrao.setAge(22);
 			clientePadrao.setEmail("ana22@gmail.com");
-			clientePadrao.setNumber("619999999");
+			clientePadrao.setVatNumber("619999999");
 
 			clienteRepository.save(clientePadrao);
 

@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Cliente {
@@ -11,12 +14,28 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Size(min = 5,max = 11, message = "Nome deve ter entre 5 e 11 caracteres")
     private String name;
+
+    @Min(18)
     private int age;
-    private String number;
+
+    //2 letras seguidas de vários numeros
+    private String vatNumber;
+
+    @Email(message="Email inválido")
     private String email;
 
     public Cliente(){}
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -34,12 +53,12 @@ public class Cliente {
         this.age = age;
     }
 
-    public String getNumber() {
-        return number;
+    public String getVatNumber() {
+        return vatNumber;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setVatNumber(String vatNumber) {
+        this.vatNumber = vatNumber;
     }
 
     public String getEmail() {
