@@ -34,7 +34,7 @@ public class ClienteService {
             .filter(cliente -> cliente.getVatNumber().equals(vatNumber))
             .collect(Collectors.toList());
         
-        return ResponseEntity.ok(clienteProcurado.get(0));
+        return ResponseEntity.ok(clienteProcurado.stream().findFirst().get());
 
     }
 
@@ -53,8 +53,9 @@ public class ClienteService {
 
     }
 
-    public void deletarCliente(Long id){
+    public ResponseEntity<Void> deletarCliente(Long id){
        clienteRepository.deleteById(id);
+       return ResponseEntity.noContent().build();
     }
 
 }
