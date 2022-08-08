@@ -1,8 +1,7 @@
 package br.com.lets.code.aula1.controller;
 
 import br.com.lets.code.aula1.model.Cliente;
-import br.com.lets.code.aula1.repository.ClienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.lets.code.aula1.service.ClienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -19,35 +18,45 @@ import javax.validation.Valid;
 @RequestMapping("/client")
 public class ClienteController {
 
-    @Autowired
-    private ClienteRepository clienteRepository;
+    private final ClienteService clienteService;
+    
+
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
+
 
     @GetMapping("/list")
     public ResponseEntity<Iterable<Cliente>> listarClientes() {
-        return ResponseEntity.ok(clienteRepository.findAll());
+        return clienteService.listarClientes();
+    }
+
+    @GetMapping("/list/client/{id}")
+    public ResponseEntity<Cliente> listarClientePeloId(@PathVariable("id") long id){
+        return clienteService.listarClientePeloId(id);
+    }
+
+    @GetMapping("/list/{vatNumber}")
+    public ResponseEntity<Cliente> listarClientePeloVatNumber(@PathVariable("vatNumber") String vatNumber){
+        return clienteService.listarClientePeloVatNumber(vatNumber);
     }
 
     @PostMapping("/client")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> criarCliente(@Valid @RequestBody Cliente cliente) {
-        if(!cliente.equals(null)){
-            clienteRepository.save(cliente);
-        }
-        return ResponseEntity.noContent().build();
+        return clienteService.criarCliente(cliente);
     }
 
     @PutMapping("/update/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> atualizarCliente(@Valid @RequestBody Cliente clienteAtualizado, @PathVariable("id") Long id) {
-        clienteAtualizado.setId(id);
-        clienteRepository.save(clienteAtualizado);
-
-        return  ResponseEntity.noContent().build();
+        return clienteService.atualizarCliente(clienteAtualizado, id);
 
     }
 
     @DeleteMapping("/delete/{id}")
     public void deletarCliente(@PathVariable("id") Long id){
-       clienteRepository.deleteById(id);
+       clienteService.deletarCliente(id);;
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
